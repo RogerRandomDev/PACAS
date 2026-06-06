@@ -1,0 +1,4 @@
+extends Node
+class_name PACASInventoryItem
+
+var dataModel:PACASObjectDataModel

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PACASDefaultsDataModel" load_steps=2 format=3 uid="uid://dsqd0d3evwk6w"]
+
+[ext_resource type="Script" uid="uid://bl4dtbsagnd3j" path="res://addons/PACAS/components/models/PACASDefaultsModel.gd" id="1_4vu4y"]
+
+[resource]
+script = ExtResource("1_4vu4y")
+rootFolder = "res://PACAS"
+texturesFolder = &"res://"
+stageStateFolder = &"res://PACAS/StateScripts"
+logicScriptsFolder = &"res://PACAS/LogicScripts"
+inventoryHandler = "res://addons/PACAS/components/inventory/inventoryHandlerBase.gd"
+metadata/_custom_type_script = "uid://bl4dtbsagnd3j"

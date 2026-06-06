@@ -11,5 +11,14 @@ config_version=5
 [application]
 
 config/name="PACAS"
+run/main_scene="uid://bp6ivxpgko6ya"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+PACASInteractions="*res://addons/PACAS/components/interaction/InteractionController.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/PACAS/plugin.cfg")

@@ -1,0 +1,171 @@
+[gd_scene load_steps=7 format=3 uid="uid://bairg7egysfgv"]
+
+[ext_resource type="Theme" uid="uid://diefpmle438rb" path="res://addons/PACAS/editor/PACASEditorInterface.tres" id="1_4ajk1"]
+[ext_resource type="Script" uid="uid://drslb207aretf" path="res://addons/PACAS/editor/interface/object_tab.gd" id="1_v2cqi"]
+[ext_resource type="Texture2D" uid="uid://dc0fjcv6avqoh" path="res://addons/PACAS/editor/interface/Undo.svg" id="3_05a7x"]
+[ext_resource type="Texture2D" uid="uid://cei3u5opxo0wt" path="res://addons/PACAS/editor/interface/Duplicate.svg" id="3_ietrx"]
+[ext_resource type="Script" uid="uid://ufg4k5wmav2k" path="res://addons/PACAS/editor/interface/object_file_selections.gd" id="3_lkj25"]
+[ext_resource type="Texture2D" uid="uid://b5gb5jqg1dnnf" path="res://addons/PACAS/editor/interface/Save.svg" id="4_05a7x"]
+
+[node name="ObjectTab" type="HSplitContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4ajk1")
+script = ExtResource("1_v2cqi")
+
+[node name="ObjectFileSelections" type="Tree" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+scroll_horizontal_enabled = false
+script = ExtResource("3_lkj25")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ObjectSelectedPath" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "OBJ_PATH"
+horizontal_alignment = 1
+
+[node name="UndoObjectChangesButton" type="TextureButton" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Revert unsaved changes"
+texture_normal = ExtResource("3_05a7x")
+stretch_mode = 5
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/UndoObjectChangesButton"]
+auto_translate_mode = 1
+title = "Confirm Revert..."
+initial_position = 4
+ok_button_text = "Revert"
+dialog_text = "Are you sure? All unsaved changes will be undone"
+
+[node name="DuplicateObjectButton" type="TextureButton" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Duplicate the object"
+texture_normal = ExtResource("3_ietrx")
+stretch_mode = 5
+
+[node name="SaveObjectButton" type="TextureButton" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Save current changes"
+texture_normal = ExtResource("4_05a7x")
+stretch_mode = 5
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/SaveObjectButton"]
+initial_position = 4
+ok_button_text = "Save"
+dialog_text = "Confirm save?"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name"
+
+[node name="ObjectNameEdit" type="LineEdit" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Description"
+
+[node name="ObjectDescriptionEdit" type="LineEdit" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Texture"
+
+[node name="ObjectTexturePath" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Choose Texture"
+
+[node name="ObjectTexturePathDialog" type="FileDialog" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+title = "Open a File"
+ok_button_text = "Select"
+file_mode = 0
+filters = PackedStringArray("*.png")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Tags"
+horizontal_alignment = 1
+
+[node name="ObjectTagTree" type="Tree" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+columns = 3
+column_titles_visible = true
+hide_folding = true
+hide_root = true
+scroll_horizontal_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ObjectTagAddName" type="LineEdit" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Tag Name"
+
+[node name="ObjectTagAddButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add Tag"

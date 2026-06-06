@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PACASObjectDataModel" load_steps=2 format=3 uid="uid://brwqicjufa7yu"]
+
+[ext_resource type="Script" uid="uid://dneyilg8fyi0b" path="res://addons/PACAS/components/models/ObjectDataModel.gd" id="1_k6ups"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_k6ups")
+name = &"example item name"
+texturePath = "<null>"
+description = "this example item should be clear for helping understand how these will work!"
+tags = {
+"example_tag": "example tag has a string for a value"
+}
+groupOwnerID = &""
+metadata/_custom_type_script = "uid://dneyilg8fyi0b"

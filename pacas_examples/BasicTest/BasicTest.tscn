@@ -1,0 +1,213 @@
+[gd_scene load_steps=17 format=3 uid="uid://bp6ivxpgko6ya"]
+
+[ext_resource type="Script" uid="uid://bowm5lvwuvqfe" path="res://pacas_examples/BasicTest/basic_test.gd" id="1_huplf"]
+[ext_resource type="Script" uid="uid://djc5cxgqsdhfv" path="res://addons/PACAS/components/interaction/InteractionObject.gd" id="1_y6vjs"]
+[ext_resource type="Resource" uid="uid://b20m27gk5klqx" path="res://pacas_examples/BasicTest/ExampleObject_01.tres" id="2_21ehm"]
+[ext_resource type="Texture2D" uid="uid://ddcfskf8vhgui" path="res://icon.svg" id="3_21ehm"]
+[ext_resource type="Script" uid="uid://2ns21eoc6hy3" path="res://addons/PACAS/components/logic/LogicCallScript.gd" id="3_huplf"]
+[ext_resource type="Script" uid="uid://cgw7aig56kv8" path="res://addons/PACAS/components/logic/LogicFilterTags.gd" id="4_sv3dn"]
+[ext_resource type="PackedScene" uid="uid://dcqbg3si2iyu6" path="res://addons/PACAS/debug/PACASDebug.tscn" id="7_bjcge"]
+[ext_resource type="Script" uid="uid://cds2lcumhuvhf" path="res://addons/PACAS/components/stage/stageStateController.gd" id="8_unmw5"]
+
+[sub_resource type="Resource" id="Resource_ipe3u"]
+script = ExtResource("3_huplf")
+ScriptFile = "uid://cf6mxnbmxe1rf"
+ScriptMethod = &"testFilterNotTagged"
+_paramType = 0
+callParameter = null
+metadata/_custom_type_script = "uid://2ns21eoc6hy3"
+
+[sub_resource type="Resource" id="Resource_bjcge"]
+script = ExtResource("3_huplf")
+ScriptFile = "uid://cf6mxnbmxe1rf"
+ScriptMethod = &"testFilter"
+_paramType = 0
+callParameter = null
+metadata/_custom_type_script = "uid://2ns21eoc6hy3"
+
+[sub_resource type="Resource" id="Resource_sv3dn"]
+script = ExtResource("4_sv3dn")
+tagSource = &"__GLOBAL__"
+tags = PackedStringArray()
+isBlacklist = false
+requireAll = true
+useREGEX = false
+followUp = SubResource("Resource_bjcge")
+alternateFollowUp = SubResource("Resource_ipe3u")
+metadata/_custom_type_script = "uid://cgw7aig56kv8"
+
+[sub_resource type="Resource" id="Resource_unmw5"]
+script = ExtResource("3_huplf")
+ScriptFile = "uid://cf6mxnbmxe1rf"
+ScriptMethod = &"testGiveTestTag"
+_paramType = 0
+callParameter = null
+metadata/_custom_type_script = "uid://2ns21eoc6hy3"
+
+[sub_resource type="Resource" id="Resource_mwmbp"]
+script = ExtResource("3_huplf")
+ScriptFile = "uid://cf6mxnbmxe1rf"
+ScriptMethod = &"testHoverExample"
+_paramType = 0
+callParameter = null
+metadata/_custom_type_script = "uid://2ns21eoc6hy3"
+
+[sub_resource type="Resource" id="Resource_6mssq"]
+script = ExtResource("3_huplf")
+ScriptFile = "uid://cf6mxnbmxe1rf"
+ScriptMethod = &"testUnhoverExample"
+_paramType = 0
+callParameter = null
+metadata/_custom_type_script = "uid://2ns21eoc6hy3"
+
+[sub_resource type="Resource" id="Resource_o8mci"]
+script = ExtResource("4_sv3dn")
+tagSource = &"__GLOBAL__"
+tags = PackedStringArray("test_global_tag")
+isBlacklist = false
+requireAll = false
+useREGEX = false
+metadata/_custom_type_script = "uid://cgw7aig56kv8"
+
+[sub_resource type="Resource" id="Resource_6bb0t"]
+script = ExtResource("4_sv3dn")
+tagSource = &"__GLOBAL__"
+tags = PackedStringArray("test_global_tag")
+isBlacklist = true
+requireAll = false
+useREGEX = false
+metadata/_custom_type_script = "uid://cgw7aig56kv8"
+
+[node name="BasicTest" type="Node2D"]
+script = ExtResource("1_huplf")
+
+[node name="Obj1" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+script = ExtResource("1_y6vjs")
+uniqueID = &"OBJ_TEST_ID"
+onClicked = SubResource("Resource_sv3dn")
+dataModel = ExtResource("2_21ehm")
+groups = PackedStringArray("test_group")
+metadata/_custom_type_script = "uid://djc5cxgqsdhfv"
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="Obj1"]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("3_21ehm")
+centered = false
+
+[node name="Label" type="Label" parent="Obj1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Click To test
+Filter With and
+without the tag"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Obj2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_right = 320.0
+offset_bottom = 128.0
+script = ExtResource("1_y6vjs")
+uniqueID = &"OBJ_TEST_ID2"
+onClicked = SubResource("Resource_unmw5")
+dataModel = ExtResource("2_21ehm")
+groups = PackedStringArray("test_group")
+metadata/_custom_type_script = "uid://djc5cxgqsdhfv"
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="Obj2"]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("3_21ehm")
+centered = false
+
+[node name="Label" type="Label" parent="Obj2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Click To give
+The \"testTag\"
+tag"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Obj3" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 256.0
+offset_right = 192.0
+offset_bottom = 384.0
+script = ExtResource("1_y6vjs")
+uniqueID = &"OBJ_TEST_ID3"
+onHover = SubResource("Resource_mwmbp")
+onUnhover = SubResource("Resource_6mssq")
+dataModel = ExtResource("2_21ehm")
+groups = PackedStringArray("test_group", "test_extra_group")
+metadata/_custom_type_script = "uid://djc5cxgqsdhfv"
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="Obj3"]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("3_21ehm")
+centered = false
+
+[node name="Label" type="Label" parent="Obj3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Hover Me to change my text"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PacasDebug" parent="." instance=ExtResource("7_bjcge")]
+
+[node name="PanelContainer" parent="PacasDebug" index="0"]
+offset_left = -448.0
+offset_bottom = 384.0
+
+[node name="PACASStageState" type="Node" parent="."]
+script = ExtResource("8_unmw5")
+stageStateName = &"DefaultState"
+description = "resets Group colors when global lacks a specific tag"
+stateLogic = SubResource("Resource_o8mci")
+onGroups = PackedStringArray("test_group")
+ScriptFile = "uid://cf7mmsic3myex"
+ScriptMethod = &"exampleColorWhite"
+_paramType = 0
+callParameter = null
+metadata/_custom_type_script = "uid://cds2lcumhuvhf"
+
+[node name="PACASStageState2" type="Node" parent="PACASStageState"]
+script = ExtResource("8_unmw5")
+stageStateName = &"DefaultState_Sub"
+description = "resets color on Groups when global lacks a specific tag (executes after DefaultState so it resets them if it changed them for its groups first)"
+stateLogic = SubResource("Resource_6bb0t")
+onGroups = PackedStringArray("test_extra_group")
+ScriptFile = "uid://cf7mmsic3myex"
+ScriptMethod = &"exampleColorWhite"
+_paramType = 0
+callParameter = null
+metadata/_custom_type_script = "uid://cds2lcumhuvhf"
+
+[editable path="PacasDebug"]

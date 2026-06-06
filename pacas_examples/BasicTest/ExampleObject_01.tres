@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PACASObjectDataModel" load_steps=2 format=3 uid="uid://b20m27gk5klqx"]
+
+[ext_resource type="Script" uid="uid://dneyilg8fyi0b" path="res://addons/PACAS/components/models/ObjectDataModel.gd" id="1_jj4kq"]
+
+[resource]
+script = ExtResource("1_jj4kq")
+name = &"Example Object #1"
+description = "This is an example of an object's description.
+Nothings stops you from using
+BBCODE if you use a rich label top display it"
+tags = ["ExampleTag_0", "ExampleTag_1"]
+metadata/_custom_type_script = "uid://dneyilg8fyi0b"

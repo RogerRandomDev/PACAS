@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://dct1cdxcnt3b5"]
+
+[ext_resource type="Theme" uid="uid://diefpmle438rb" path="res://addons/PACAS/editor/PACASEditorInterface.tres" id="1_7fca4"]
+[ext_resource type="Script" uid="uid://direkdu8u64pr" path="res://addons/PACAS/editor/pacas_editor_interface.gd" id="1_8xcu1"]
+[ext_resource type="PackedScene" uid="uid://dr87pffbgb3b8" path="res://addons/PACAS/editor/interface/ConfigTab.tscn" id="1_mwdfn"]
+[ext_resource type="PackedScene" uid="uid://bairg7egysfgv" path="res://addons/PACAS/editor/interface/ObjectTab.tscn" id="3_np8po"]
+[ext_resource type="PackedScene" uid="uid://nkeim2nikjig" path="res://addons/PACAS/editor/interface/SceneTab.tscn" id="5_wruxr"]
+
+[node name="PacasEditorInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_7fca4")
+script = ExtResource("1_8xcu1")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Config" parent="TabContainer" instance=ExtResource("1_mwdfn")]
+layout_mode = 2
+
+[node name="Objects" parent="TabContainer" instance=ExtResource("3_np8po")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Scenes" parent="TabContainer" instance=ExtResource("5_wruxr")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
