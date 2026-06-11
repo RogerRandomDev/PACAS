@@ -181,6 +181,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="PacasDebug" parent="." instance=ExtResource("7_bjcge")]
+visible = false
 
 [node name="PanelContainer" parent="PacasDebug" index="0"]
 offset_left = -448.0

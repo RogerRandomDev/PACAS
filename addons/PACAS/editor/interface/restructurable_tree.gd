@@ -31,8 +31,10 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 	var drop_section := get_drop_section_at_position(at_position)
 	var other_item := get_item_at_position(at_position)
 	
+	
 	for i in data.size():
 		var item := data[i] as TreeItem
+		if drop_section != 0 and other_item.get_parent() == data[0].get_parent():return
 		if drop_section == -1:
 			item.move_before(other_item)
 		elif drop_section == 1:

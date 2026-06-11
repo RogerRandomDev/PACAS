@@ -10,6 +10,7 @@ class_name PACASDefaultsDataModel
 
 @export_group("FileDefaults")
 @export var rootFolder:StringName=&"res://"
+@export var scenesFolder:StringName=&"res://"
 @export var texturesFolder:StringName=&"res://"
 @export var stageStateFolder:StringName=&"res://"
 @export var logicScriptsFolder:StringName=&"res://"

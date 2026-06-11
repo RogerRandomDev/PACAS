@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://direkdu8u64pr" path="res://addons/PACAS/editor/pacas_editor_interface.gd" id="1_8xcu1"]
 [ext_resource type="PackedScene" uid="uid://dr87pffbgb3b8" path="res://addons/PACAS/editor/interface/ConfigTab.tscn" id="1_mwdfn"]
 [ext_resource type="PackedScene" uid="uid://bairg7egysfgv" path="res://addons/PACAS/editor/interface/ObjectTab.tscn" id="3_np8po"]
-[ext_resource type="PackedScene" uid="uid://nkeim2nikjig" path="res://addons/PACAS/editor/interface/SceneTab.tscn" id="5_wruxr"]
+[ext_resource type="PackedScene" uid="uid://nkeim2nikjig" path="res://addons/PACAS/editor/interface/sceneTab/SceneTab.tscn" id="5_wruxr"]
 
 [node name="PacasEditorInterface" type="Control"]
 layout_mode = 3

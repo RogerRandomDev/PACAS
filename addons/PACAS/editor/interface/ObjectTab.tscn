@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://drslb207aretf" path="res://addons/PACAS/editor/interface/object_tab.gd" id="1_v2cqi"]
 [ext_resource type="Texture2D" uid="uid://dc0fjcv6avqoh" path="res://addons/PACAS/editor/interface/Undo.svg" id="3_05a7x"]
 [ext_resource type="Texture2D" uid="uid://cei3u5opxo0wt" path="res://addons/PACAS/editor/interface/Duplicate.svg" id="3_ietrx"]
-[ext_resource type="Script" uid="uid://ufg4k5wmav2k" path="res://addons/PACAS/editor/interface/object_file_selections.gd" id="3_lkj25"]
+[ext_resource type="Script" uid="uid://ufg4k5wmav2k" path="res://addons/PACAS/editor/interface/restructurable_tree.gd" id="3_lkj25"]
 [ext_resource type="Texture2D" uid="uid://b5gb5jqg1dnnf" path="res://addons/PACAS/editor/interface/Save.svg" id="4_05a7x"]
 
 [node name="ObjectTab" type="HSplitContainer"]
