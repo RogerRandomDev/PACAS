@@ -30,6 +30,7 @@ func iterateGetInteractionObjects(iterator:Node)->Array:
 
 func loadObjectList(objects:Array)->void:
 	%SceneInteractionObjectListTree.clear()
+	get_parent().itemSelected.emit(null)
 	var root:TreeItem=%SceneInteractionObjectListTree.create_item()
 	for interactionObject in objects:
 		var objectItem:TreeItem = root.create_child()

@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://dex0c6oif7gyt"]
+
+[ext_resource type="Script" uid="uid://c2h5excj0uj07" path="res://addons/PACAS/editor/interface/InteractionLogicNodes/DATAVIEW_PACASLogicCallMethod.gd" id="1_00npq"]
+
+[node name="CallScriptLogicParameters" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_00npq")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Script Path"
+
+[node name="ScriptPathChangeButton" type="Button" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Change path"
+
+[node name="FileDialogScriptPathChangeFileDialog" type="FileDialog" parent="HBoxContainer2"]
+title = "Open a File"
+file_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Script Method"
+
+[node name="ScriptMethodDropdown" type="OptionButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 1
+popup/item_0/text = "Default Method"
+popup/item_0/id = 0

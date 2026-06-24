@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bp6ivxpgko6ya"]
+[gd_scene load_steps=22 format=3 uid="uid://bp6ivxpgko6ya"]
 
 [ext_resource type="Script" uid="uid://bowm5lvwuvqfe" path="res://pacas_examples/BasicTest/basic_test.gd" id="1_huplf"]
 [ext_resource type="Script" uid="uid://djc5cxgqsdhfv" path="res://addons/PACAS/components/interaction/InteractionObject.gd" id="1_y6vjs"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" uid="uid://2ns21eoc6hy3" path="res://addons/PACAS/components/logic/LogicCallScript.gd" id="3_huplf"]
 [ext_resource type="Script" uid="uid://cgw7aig56kv8" path="res://addons/PACAS/components/logic/LogicFilterTags.gd" id="4_sv3dn"]
 [ext_resource type="PackedScene" uid="uid://dcqbg3si2iyu6" path="res://addons/PACAS/debug/PACASDebug.tscn" id="7_bjcge"]
+[ext_resource type="Script" uid="uid://df6kyc3ut8x0t" path="res://addons/PACAS/components/interaction/InteractionObjectTextured.gd" id="7_mwmbp"]
+[ext_resource type="Script" uid="uid://dneyilg8fyi0b" path="res://addons/PACAS/components/models/ObjectDataModel.gd" id="8_6mssq"]
+[ext_resource type="Texture2D" uid="uid://7humx7kh401m" path="res://icon2.svg" id="8_o8mci"]
 [ext_resource type="Script" uid="uid://cds2lcumhuvhf" path="res://addons/PACAS/components/stage/stageStateController.gd" id="8_unmw5"]
 
 [sub_resource type="Resource" id="Resource_ipe3u"]
@@ -59,6 +62,23 @@ ScriptMethod = &"testUnhoverExample"
 _paramType = 0
 callParameter = null
 metadata/_custom_type_script = "uid://2ns21eoc6hy3"
+
+[sub_resource type="Resource" id="Resource_xo3g8"]
+script = ExtResource("3_huplf")
+ScriptFile = "uid://cf6mxnbmxe1rf"
+ScriptMethod = &"testTetureChangeTag"
+_paramType = 4
+callParameter = "TexturedTestID_0"
+metadata/_custom_type_script = "uid://2ns21eoc6hy3"
+
+[sub_resource type="Resource" id="Resource_c8v4w"]
+script = ExtResource("8_6mssq")
+name = &"testTexturedObject"
+texturePath = "uid://ddcfskf8vhgui"
+description = ""
+tags = {}
+groupOwnerID = &""
+metadata/_custom_type_script = "uid://dneyilg8fyi0b"
 
 [sub_resource type="Resource" id="Resource_o8mci"]
 script = ExtResource("4_sv3dn")
@@ -179,6 +199,58 @@ text = "Hover Me to change my text"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="Obj4" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 640.0
+offset_top = 192.0
+offset_right = 768.0
+offset_bottom = 320.0
+script = ExtResource("1_y6vjs")
+uniqueID = &"OBJ_TEST_ID4"
+onClicked = SubResource("Resource_xo3g8")
+dataModel = ExtResource("2_21ehm")
+groups = PackedStringArray("test_group", "test_extra_group")
+metadata/_custom_type_script = "uid://djc5cxgqsdhfv"
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="Obj4"]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("3_21ehm")
+centered = false
+
+[node name="Label" type="Label" parent="Obj4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Click me to tag
+texture change
+object
+<--"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="TexturedObj1" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 128.0
+offset_right = 648.0
+offset_bottom = 376.0
+script = ExtResource("7_mwmbp")
+textures = {
+"DoorOpen": [0, ExtResource("8_o8mci")],
+"default": [0, ExtResource("3_21ehm")]
+}
+uniqueID = &"TexturedTestID_0"
+dataModel = SubResource("Resource_c8v4w")
+metadata/_custom_type_script = "uid://df6kyc3ut8x0t"
 
 [node name="PacasDebug" parent="." instance=ExtResource("7_bjcge")]
 visible = false

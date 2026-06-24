@@ -1,3 +1,4 @@
+@tool
 extends Control
 class_name PACASInteractionObject
 
@@ -22,6 +23,11 @@ var hasDragged:bool=false
 var currentPressed:int=-1
 
 func _ready() -> void:
+	if Engine.is_editor_hint():return
+	#next line is test for now, not permanent solution
+	#replace once i have a better method to waste less memory
+	PACASInteractions.loadInteractiveObject(self)
+	
 	for group in groups:
 		add_to_group(group)
 	#hover events
@@ -39,6 +45,7 @@ func _ready() -> void:
 		)
 
 func _gui_input(event: InputEvent) -> void:
+	if Engine.is_editor_hint():return
 	#click logic
 	if event is InputEventMouseButton:
 		if currentPressed!=-1&&event.button_index!=currentPressed:return

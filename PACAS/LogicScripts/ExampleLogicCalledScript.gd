@@ -28,3 +28,8 @@ func testUnhoverExample(owner:PACASInteractionObject)->void:
 func testGiveTestTag(owner:PACASInteractionObject)->void:
 	print("Owner: %s\nTriggered the ExampleLogicCalledScript method (testGiveTestTag)\nTagging __GLOBAL__ with \"testTag\""%owner)
 	PACASInteractions.dataModel.addTag("testTag")
+
+func testTetureChangeTag(owner:PACASInteractionObject,target:String="")->void:
+	print("Owner: %s\nTriggered the ExampleLogicCalledScript method (testTetureChangeTag)\nTagging %s with \"DoorOpen\""%[owner,target])
+	
+	PACASInteractions.findByUUID(target).addTag("DoorOpen")

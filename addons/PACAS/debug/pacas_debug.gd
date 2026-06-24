@@ -9,6 +9,9 @@ var typeFilters:PackedStringArray=[]
 @export var maxLogsShown:int=100
 
 func _ready() -> void:
+	#should only show if a setting/launch option is set for debugging
+	show()
+	
 	setupLogTree()
 	setupTypeFilters()
 	

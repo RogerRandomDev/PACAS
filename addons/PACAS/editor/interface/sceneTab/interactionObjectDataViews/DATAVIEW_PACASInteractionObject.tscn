@@ -1,0 +1,124 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddqi0wilbsdoq"]
+
+[ext_resource type="Script" uid="uid://deq3ei2wofim8" path="res://addons/PACAS/editor/interface/sceneTab/interactionObjectDataViews/scene_interaction_item_side_bar.gd" id="1_hu1or"]
+
+[node name="SceneInteractionItemSideBar" type="TabContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+current_tab = 0
+script = ExtResource("1_hu1or")
+
+[node name="Parameters" type="VBoxContainer" parent="."]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Parameters"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Parameters/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Unique ID"
+
+[node name="InteractionObjectUniqueIDEdit" type="LineEdit" parent="Parameters/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Parameters"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Parameters/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Position"
+
+[node name="InteractionObjectPositionEdit" type="LineEdit" parent="Parameters/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Parameters"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Parameters/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Size"
+
+[node name="InteractionObjectSizeEdit" type="LineEdit" parent="Parameters/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Parameters"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Parameters/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Item"
+
+[node name="InteractionObjectItemSelectButton" type="Button" parent="Parameters/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Change Item"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Parameters"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Parameters/VBoxContainer"]
+layout_mode = 2
+text = "Groups"
+horizontal_alignment = 1
+
+[node name="InteractionObjectGroupListEdit" type="Tree" parent="Parameters/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+allow_rmb_select = true
+hide_root = true
+scroll_horizontal_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Parameters/VBoxContainer"]
+layout_mode = 2
+
+[node name="InteractionObjectGroupNameEdit" type="LineEdit" parent="Parameters/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InteractionObjectGroupNameAddButton" type="Button" parent="Parameters/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add Group"
+
+[node name="Logic" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Logic"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Logic/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Clicked"
+
+[node name="InteractionObjectLogicButton" type="Button" parent="Logic/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Change"

@@ -2,6 +2,9 @@
 extends HSplitContainer
 
 signal sceneLoaded(scene:Node)
+signal itemSelected(item:PACASInteractionObject)
+
+var sceneList:Dictionary
 
 var selectedScene
 var selectedSceneTreeItem:TreeItem
@@ -38,6 +41,22 @@ func _ready() -> void:
 			#placeholder cause it is slower than just being more particular but it will do for now
 			loadFileSelection.call_deferred()
 	)
+	
+	%ActiveSceneOptionsTabBar.tab_changed.connect(
+		func(id:int)->void:
+			var tab_scene=%ActiveSceneOptionsTabBar.get_tab_metadata(id)
+			if tab_scene==null:return
+			setSelectedScene(tab_scene)
+	)
+	%ActiveSceneOptionsTabBar.tab_close_pressed.connect(
+		func(id:int)->void:
+			var tab_scene=%ActiveSceneOptionsTabBar.get_tab_metadata(id)
+			if tab_scene==null:return
+			#should give a popup to ask if you want to save or cancel
+			%ActiveSceneOptionsTabBar.remove_tab(id)
+			sceneList[tab_scene].queue_free()
+			sceneList.erase(tab_scene)
+	)
 
 
 
@@ -67,7 +86,66 @@ func setSelectedScene(scene:String)->void:
 
 func loadSceneForEdit(scene:String)->void:
 	var viewport=%SceneHolderPanel.get_child(0).get_child(0).get_child(0)
-	if selectedScene:selectedScene.queue_free()
-	selectedScene=load(scene).instantiate()
-	viewport.add_child(selectedScene)
+	if selectedScene:
+		storeSceneEditState(sceneList.find_key(selectedScene))
+		selectedScene.hide()
+	if sceneList.has(scene):
+		#update tab selection if not a match
+		if (%ActiveSceneOptionsTabBar.current_tab!=-1 and 
+			%ActiveSceneOptionsTabBar.get_tab_metadata(%ActiveSceneOptionsTabBar.current_tab)!=scene
+			):
+			for i in %ActiveSceneOptionsTabBar.tab_count:
+				if %ActiveSceneOptionsTabBar.get_tab_metadata(i)==scene:
+					%ActiveSceneOptionsTabBar.current_tab=i;break
+		selectedScene=sceneList[scene]
+	else:
+		selectedScene=load(scene).instantiate()
+		viewport.add_child(selectedScene)
+		addScene(scene,selectedScene)
+	loadSceneEditState.call_deferred(scene)
+	selectedScene.show()
 	sceneLoaded.emit(selectedScene)
+
+func addScene(scene:String,node:Node)->void:
+	sceneList[scene]=node
+	
+	updateSceneSelection()
+
+func updateSceneSelection()->void:
+	var alreadyLoaded:Dictionary={}
+	for tab in %ActiveSceneOptionsTabBar.tab_count:
+		alreadyLoaded[%ActiveSceneOptionsTabBar.get_tab_title(tab)]=%ActiveSceneOptionsTabBar.get_tab_metadata(tab)
+	for scene in sceneList:
+		if alreadyLoaded.values().has(scene):continue
+		%ActiveSceneOptionsTabBar.add_tab(scene.split("/")[-1])
+		%ActiveSceneOptionsTabBar.set_tab_metadata(%ActiveSceneOptionsTabBar.tab_count-1,scene)
+		if sceneList[scene]==selectedScene:
+			%ActiveSceneOptionsTabBar.current_tab=%ActiveSceneOptionsTabBar.tab_count-1
+
+
+func storeSceneEditState(scene:String)->void:
+	var selectedItem=%SceneInteractionItemSideBarHolder.get_child(0).activeSelection
+	sceneList[scene].set_meta(&"EditState",{
+		&"Camera":%SceneTabCamera.transform,
+		&"SelectedItem":&"" if selectedItem == null else sceneList[scene].get_path_to(selectedItem)
+	})
+
+func loadSceneEditState(scene:String)->void:
+	if not sceneList[scene].has_meta(&"EditState"):
+		loadDefaultState();return
+	
+	var data=sceneList[scene].get_meta(&"EditState",null)
+	if data==null:return
+	var selectedItem=data[&"SelectedItem"]
+	%SceneTabCamera.transform=data[&"Camera"]
+	
+	#bit jank but works for now
+	for child in %SceneInteractionObjectListTree.get_root().get_children():
+		if String(sceneList[scene].get_path_to(child.get_meta("Object")))==String(selectedItem):
+			child.select(0);break
+	
+	itemSelected.emit(null if selectedItem.is_empty() else sceneList[scene].get_node(selectedItem))
+
+func loadDefaultState()->void:
+	%SceneTabCamera.transform=Transform2D()
+	

@@ -32,3 +32,9 @@ func _ready() -> void:
 
 func findByUUID(uuid:StringName)->Variant:
 	return ObjectUUIDS.get(uuid)
+
+func loadInteractiveObject(object:PACASInteractionObject)->void:
+	if ObjectUUIDS.has(object.uniqueID):
+		object.dataModel=ObjectUUIDS.get(object.uniqueID)
+	else:
+		ObjectUUIDS.set(object.uniqueID,object.dataModel)
