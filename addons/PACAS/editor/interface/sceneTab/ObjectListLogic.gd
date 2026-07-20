@@ -9,6 +9,7 @@ func _ready() -> void:
 
 func itemSelected()->void:
 	var selected:TreeItem = %SceneInteractionObjectListTree.get_selected()
+	
 	var interactionObject:PACASInteractionObject = selected.get_meta("Object",null)
 	%SelectionHighlightRect.set_meta("Object",interactionObject)
 	if interactionObject==null:return

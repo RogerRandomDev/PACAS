@@ -16,8 +16,20 @@ var texture:Texture
 ## ID of the group that owns the object for this data.
 @export var groupOwnerID:StringName=&""
 
+## adds a tag to the object. set [param removeNull] to false to allow the value to be null.
 func addTag(tag:StringName,value:Variant=null)->void:
 	if not tags.has(tag):
 		tags[tag]=value
 		PACASInteractions.modelTagged.emit(self,tag,value)
 		tagged.emit(tag,value)
+
+## sets a tag on the object. set [param removeNull] to false to allow the value to be null.
+func setTag(tag:StringName,value:Variant=null,removeNull:bool=true)->void:
+	tags[tag]=value
+	if removeNull and value==null:tags.erase(tag)
+	PACASInteractions.modelTagged.emit(self,tag,value)
+	tagged.emit(tag,value)
+
+## only checks and returns if a tag exists.
+func checkForTag(tag:StringName)->bool:
+	return tags.has(tag)

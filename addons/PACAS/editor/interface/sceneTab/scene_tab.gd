@@ -102,7 +102,7 @@ func loadSceneForEdit(scene:String)->void:
 		selectedScene=load(scene).instantiate()
 		viewport.add_child(selectedScene)
 		addScene(scene,selectedScene)
-	loadSceneEditState.call_deferred(scene)
+	loadSceneEditState(scene)
 	selectedScene.show()
 	sceneLoaded.emit(selectedScene)
 
@@ -127,7 +127,7 @@ func storeSceneEditState(scene:String)->void:
 	var selectedItem=%SceneInteractionItemSideBarHolder.get_child(0).activeSelection
 	sceneList[scene].set_meta(&"EditState",{
 		&"Camera":%SceneTabCamera.transform,
-		&"SelectedItem":&"" if selectedItem == null else sceneList[scene].get_path_to(selectedItem)
+		&"SelectedItem":&"" if selectedItem == null else String(sceneList[scene].get_path_to(selectedItem))
 	})
 
 func loadSceneEditState(scene:String)->void:
@@ -138,8 +138,9 @@ func loadSceneEditState(scene:String)->void:
 	if data==null:return
 	var selectedItem=data[&"SelectedItem"]
 	%SceneTabCamera.transform=data[&"Camera"]
-	
 	#bit jank but works for now
+	await sceneLoaded
+	await get_tree().process_frame
 	for child in %SceneInteractionObjectListTree.get_root().get_children():
 		if String(sceneList[scene].get_path_to(child.get_meta("Object")))==String(selectedItem):
 			child.select(0);break

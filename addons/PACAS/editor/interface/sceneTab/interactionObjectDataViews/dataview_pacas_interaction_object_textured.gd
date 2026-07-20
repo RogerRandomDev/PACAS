@@ -11,6 +11,26 @@ func _ready() -> void:
 		func(id:int)->void:
 			activeSelection.layoutStretch=id
 	)
+	%InteractionObjectTextureListEdit.item_selected.connect(
+		func():
+			var selected:TreeItem = %InteractionObjectTextureListEdit.get_selected()
+			var column:int = %InteractionObjectTextureListEdit.get_selected_column()
+			if selected==null:return
+			if column==1:
+				activeSelection.get("_textureSprite").set("texture",selected.get_icon(2))
+	)
+	%InteractionObjectTextureListEdit.column_title_clicked.connect(
+		func(_col:int,_btn:int):%InteractionObjectTextureListEdit.nothing_selected.emit()
+	)
+	%InteractionObjectTextureListEdit.nothing_selected.connect(
+		func():
+			%InteractionObjectTextureListEdit.deselect_all()
+			#gets default from either side
+			var tex = activeSelection.textures.get("default",[-1025,activeSelection.dataModel.texturePath])[1]
+			if not tex is Texture:tex=load(tex)
+			activeSelection.get("_textureSprite").set("texture",tex)
+	)
+	
 
 func initializeTextureTree()->void:
 	%InteractionObjectTextureListEdit.set_column_title(0,"Priority")
@@ -49,3 +69,9 @@ func updateSelected(item:PACASInteractionObject)->void:
 	%InteractionObjectTextureAlignButton.select(
 		activeSelection.layoutStretch
 	)
+
+#cleanup anything we need fixed on deselect
+func _notification(what: int) -> void:
+	if what==NOTIFICATION_PREDELETE:
+		%InteractionObjectTextureListEdit.nothing_selected.emit()
+		

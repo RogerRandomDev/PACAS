@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bp6ivxpgko6ya"]
+[gd_scene load_steps=23 format=3 uid="uid://bp6ivxpgko6ya"]
 
 [ext_resource type="Script" uid="uid://bowm5lvwuvqfe" path="res://pacas_examples/BasicTest/basic_test.gd" id="1_huplf"]
 [ext_resource type="Script" uid="uid://djc5cxgqsdhfv" path="res://addons/PACAS/components/interaction/InteractionObject.gd" id="1_y6vjs"]
@@ -68,6 +68,14 @@ script = ExtResource("3_huplf")
 ScriptFile = "uid://cf6mxnbmxe1rf"
 ScriptMethod = &"testTetureChangeTag"
 _paramType = 4
+callParameter = "TexturedTestID_0"
+metadata/_custom_type_script = "uid://2ns21eoc6hy3"
+
+[sub_resource type="Resource" id="Resource_jxyyf"]
+script = ExtResource("3_huplf")
+ScriptFile = "uid://cf6mxnbmxe1rf"
+ScriptMethod = &"openCloseDoorTest"
+_paramType = 0
 callParameter = "TexturedTestID_0"
 metadata/_custom_type_script = "uid://2ns21eoc6hy3"
 
@@ -203,10 +211,10 @@ autowrap_mode = 3
 [node name="Obj4" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 640.0
-offset_top = 192.0
-offset_right = 768.0
-offset_bottom = 320.0
+offset_left = 584.0
+offset_top = 280.0
+offset_right = 712.0
+offset_bottom = 408.0
 script = ExtResource("1_y6vjs")
 uniqueID = &"OBJ_TEST_ID4"
 onClicked = SubResource("Resource_xo3g8")
@@ -239,20 +247,22 @@ autowrap_mode = 3
 [node name="TexturedObj1" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 320.0
-offset_top = 128.0
-offset_right = 648.0
-offset_bottom = 376.0
+offset_left = 256.0
+offset_top = 208.0
+offset_right = 584.0
+offset_bottom = 456.0
 script = ExtResource("7_mwmbp")
 textures = {
-"DoorOpen": [0, ExtResource("8_o8mci")],
+"DoorOpen": [2, ExtResource("8_o8mci")],
 "default": [0, ExtResource("3_21ehm")]
 }
 uniqueID = &"TexturedTestID_0"
+onClicked = SubResource("Resource_jxyyf")
 dataModel = SubResource("Resource_c8v4w")
 metadata/_custom_type_script = "uid://df6kyc3ut8x0t"
 
 [node name="PacasDebug" parent="." instance=ExtResource("7_bjcge")]
+layer = 4
 visible = false
 
 [node name="PanelContainer" parent="PacasDebug" index="0"]

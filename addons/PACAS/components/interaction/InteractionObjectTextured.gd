@@ -56,8 +56,17 @@ func updateLayout()->void:
 			_textureSprite.scale=Vector2(size.y/textureSize.y,size.y/textureSize.y)
 
 func onTagged(tag:String,value:Variant)->void:
-	#should account for priority at some point
-	if textures.has(tag):
-		var textureInfo=textures.get(tag)
-		if not textureInfo[1] is Texture:return
-		_textureSprite.texture=textureInfo[1]
+	updateTextureState()
+
+#checks all texture options, and chooses the highest priority option
+func updateTextureState()->void:
+	var chosenTexture=textures.get("default",[-1025,dataModel.texture])
+	for tag in textures:
+		var priority=textures[tag][0]
+		#would be faster if we pre-sort by priority, and keep the first one to succeed
+		if priority<=chosenTexture[0]:continue #faster to skip check if lower priority first
+		if not dataModel.checkForTag(tag):continue
+		chosenTexture=textures[tag]
+	if not chosenTexture[1] is Texture:return
+	_textureSprite.texture=chosenTexture[1]
+	

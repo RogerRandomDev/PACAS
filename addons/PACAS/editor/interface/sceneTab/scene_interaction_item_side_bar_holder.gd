@@ -14,5 +14,6 @@ func updateShownSelection(selectedItem:PACASInteractionObject)->void:
 	if not FileAccess.file_exists(fullPath):return
 	get_child(0).queue_free()
 	var newSideView=load(fullPath).instantiate()
-	add_child.call_deferred(newSideView)
-	newSideView.updateSelected.call_deferred(selectedItem)
+	add_child(newSideView)
+	newSideView.updateSelected(selectedItem)
+	move_child(newSideView,0)

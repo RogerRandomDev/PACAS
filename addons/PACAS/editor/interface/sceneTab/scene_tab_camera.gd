@@ -10,7 +10,7 @@ func _ready() -> void:
 	$"../../../..".resized.connect(updateResize)
 	
 func updateResize()->void:
-	var resolution_scale:Vector2=($"../../../..".size/Vector2(default_resolution))
+	var resolution_scale:Vector2=(($"../../../..".size)/Vector2(default_resolution))
 	var minScaled:Vector2=Vector2(
 		min(resolution_scale.x,resolution_scale.y),
 		min(resolution_scale.x,resolution_scale.y)
@@ -18,15 +18,7 @@ func updateResize()->void:
 	if minScaled.x==0:return
 	zoom=minScaled
 	
-	var ratio=float(default_resolution.x)/float(default_resolution.y)
-	#keeps ratio for visibility consistent
-	if minScaled.x==resolution_scale.x:
-		$"../..".custom_minimum_size.x=$"../../../..".size.x
-		$"../..".custom_minimum_size.y=$"../../../..".size.x / ratio 
-	else:
-		$"../..".custom_minimum_size.x=$"../../../..".size.y * ratio
-		$"../..".custom_minimum_size.y=$"../../../..".size.y 
+	$"../..".custom_minimum_size=Vector2(default_resolution)*minScaled
 	$"../..".size=Vector2.ZERO
-	$"../..".position=-$"../..".custom_minimum_size*0.5
-	
+	$"../..".position=-Vector2(default_resolution)*minScaled*0.5
 	
