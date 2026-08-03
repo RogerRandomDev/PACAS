@@ -24,6 +24,8 @@ var currentPressed:int=-1
 
 func _ready() -> void:
 	if Engine.is_editor_hint():return
+	
+	dataModel=dataModel.duplicate(true)
 	#next line is test for now, not permanent solution
 	#replace once i have a better method to waste less memory
 	PACASInteractions.loadInteractiveObject(self)
@@ -48,6 +50,9 @@ func _gui_input(event: InputEvent) -> void:
 	if Engine.is_editor_hint():return
 	#click logic
 	if event is InputEventMouseButton:
+		if event.button_index==MOUSE_BUTTON_MIDDLE and event.pressed and PACASInteractions.debugger:
+			PACASInteractions.debugger.selectedObject.emit(self)
+		
 		if currentPressed!=-1&&event.button_index!=currentPressed:return
 		# mark as not having dragged if a valid click event has started
 		if event.is_pressed() and [MOUSE_BUTTON_LEFT,MOUSE_BUTTON_RIGHT].has(event.button_index):

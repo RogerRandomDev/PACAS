@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PACASObjectDataModel" load_steps=2 format=3 uid="uid://c3yc6alf8x3fw"]
+
+[ext_resource type="Script" uid="uid://dneyilg8fyi0b" path="res://addons/PACAS/components/models/ObjectDataModel.gd" id="1_nl14k"]
+
+[resource]
+script = ExtResource("1_nl14k")
+name = &"key"
+texturePath = null
+description = "This is an example object with a purpose.
+Tagged w/ KEY_FOR set to DOOR_0 so it can filter to match this as well"
+tags = {
+"KEY_FOR": "DOOR_0"
+}
+groupOwnerID = &""
+metadata/_custom_type_script = "uid://dneyilg8fyi0b"

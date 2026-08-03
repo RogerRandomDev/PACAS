@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PACASObjectDataModel" load_steps=2 format=3 uid="uid://dck8ff612mnvc"]
+
+[ext_resource type="Script" uid="uid://dneyilg8fyi0b" path="res://addons/PACAS/components/models/ObjectDataModel.gd" id="1_627qu"]
+
+[resource]
+script = ExtResource("1_627qu")
+name = &"key Piece B"
+texturePath = null
+description = "This is piece b of a key. combines with piece A"
+tags = {
+"KEY_0": "B"
+}
+groupOwnerID = &""
+metadata/_custom_type_script = "uid://dneyilg8fyi0b"

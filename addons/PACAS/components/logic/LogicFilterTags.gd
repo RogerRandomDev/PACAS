@@ -20,7 +20,7 @@ func _executeInternal(iterationOwner:PACASInteractionObject)->bool:
 		if iterationOwner==null:return false
 		checkTags=iterationOwner.dataModel
 	else:
-		checkTags=PACASInteractions.findByUUID(tagSource).dataModel
+		checkTags=PACASInteractions.findByUUID(tagSource)
 	var passedTests:bool=true
 	if not useREGEX:
 		if requireAll:passedTests=Array(tags).all(func(tag):return checkTags.tags.has(tag))

@@ -161,7 +161,7 @@ func loadSelectedModelData()->void:
 	%ObjectSelectedPath.text=selectedModel.resource_path
 	%ObjectNameEdit.text=selectedModel.name
 	%ObjectDescriptionEdit.text=selectedModel.description
-	%ObjectTexturePath.text=selectedModel.texturePath
+	%ObjectTexturePath.text=str(selectedModel.texturePath)
 	#tags
 	%ObjectTagTree.clear()
 	%ObjectTagTree.create_item()

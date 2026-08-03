@@ -12,7 +12,7 @@ func execute(iterationOwner:PACASInteractionObject)->bool:
 	var runFollowup:bool=_executeInternal(iterationOwner)
 	if followUp!=null and runFollowup:
 		return followUp.execute(iterationOwner)
-	if followUp!=null and not runFollowup:
+	if alternateFollowUp!=null and not runFollowup:
 		alternateFollowUp.execute(iterationOwner)
 	return runFollowup
 

@@ -22,12 +22,16 @@ var ObjectUUIDS:Dictionary={}
 
 var dataModel:PACASObjectDataModel=PACASObjectDataModel.new()
 
+var inventoryHandler:PACASInventoryBaseMiddleware=PACASInventoryBaseMiddleware.new()
+
+var debugger
+
 #defaults
 var PACASDefaults:PACASDefaultsDataModel=load("res://addons/PACAS/PACASDefaults.tres")
 
 
 func _ready() -> void:
-	ObjectUUIDS["__GLOBAL__"]=self
+	ObjectUUIDS["__GLOBAL__"]=self.dataModel
 
 
 func findByUUID(uuid:StringName)->Variant:

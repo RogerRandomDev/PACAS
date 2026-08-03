@@ -7,7 +7,7 @@ signal tagged(tag:String,value:Variant)
 @export var name:StringName=&""
 @export_file("*.png","*.svg") var texturePath:
 	set(v):
-		if FileAccess.file_exists(v):
+		if v!=null and FileAccess.file_exists(v):
 			texture=load(v)
 		texturePath=v
 var texture:Texture

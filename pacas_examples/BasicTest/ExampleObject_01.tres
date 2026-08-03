@@ -5,8 +5,10 @@
 [resource]
 script = ExtResource("1_jj4kq")
 name = &"Example Object #1"
+texturePath = null
 description = "This is an example of an object's description.
 Nothings stops you from using
 BBCODE if you use a rich label top display it"
-tags = ["ExampleTag_0", "ExampleTag_1"]
+tags = {}
+groupOwnerID = &""
 metadata/_custom_type_script = "uid://dneyilg8fyi0b"

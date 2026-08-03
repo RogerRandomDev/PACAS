@@ -29,6 +29,23 @@ func testGiveTestTag(owner:PACASInteractionObject)->void:
 	print("Owner: %s\nTriggered the ExampleLogicCalledScript method (testGiveTestTag)\nTagging __GLOBAL__ with \"testTag\""%owner)
 	PACASInteractions.dataModel.addTag("testTag",null)
 
+func testCombineKey(owner:PACASInteractionObject,item:PACASObjectDataModel)->void:
+	print("Owner: %s\nTriggered the ExampleLogicCalledScript method (testCombineKey)"%[owner])
+	var keyParts = PACASInteractions.inventoryHandler.searchInventoryByTag("KEY_0")
+	if keyParts.size()<2:return
+	var allParts={}
+	for part in keyParts:
+		allParts[part.dataModel.name]=part
+	if allParts.size()!=2:return
+	for item_b in allParts:
+		PACASInteractions.inventoryHandler.removeInventoryItemToInventory(allParts[item_b])
+	PACASInteractions.inventoryHandler.addItemToInventory(item)
+
+
+func testGiveItem(owner:PACASInteractionObject,item:PACASObjectDataModel)->void:
+	print("Owner: %s\nTriggered the ExampleLogicCalledScript method (testGiveItem)\nGiving item Named (%s)"%[owner,item.name])
+	PACASInteractions.inventoryHandler.addItemToInventory(item)
+
 func testTetureChangeTag(owner:PACASInteractionObject,target:String="")->void:
 	print("Owner: %s\nTriggered the ExampleLogicCalledScript method (testTetureChangeTag)\nTagging %s with \"CanOpenDoor\""%[owner,target])
 	

@@ -1,0 +1,263 @@
+[gd_scene load_steps=26 format=3 uid="uid://bed3hr6u2xkjj"]
+
+[ext_resource type="Script" uid="uid://bowm5lvwuvqfe" path="res://pacas_examples/BasicTest/basic_test.gd" id="1_ixv62"]
+[ext_resource type="Script" uid="uid://djc5cxgqsdhfv" path="res://addons/PACAS/components/interaction/InteractionObject.gd" id="2_ulp8h"]
+[ext_resource type="Resource" uid="uid://dck8ff612mnvc" path="res://PACAS/subfolder/subsubfolder/ExampleStageKey0_PartB.tres" id="3_4x1aj"]
+[ext_resource type="Script" uid="uid://2ns21eoc6hy3" path="res://addons/PACAS/components/logic/LogicCallScript.gd" id="3_htrae"]
+[ext_resource type="Script" uid="uid://cgw7aig56kv8" path="res://addons/PACAS/components/logic/LogicFilterTags.gd" id="4_anwad"]
+[ext_resource type="Resource" uid="uid://b20m27gk5klqx" path="res://pacas_examples/BasicTest/ExampleObject_01.tres" id="5_i1kfg"]
+[ext_resource type="Resource" uid="uid://c3yc6alf8x3fw" path="res://PACAS/subfolder/subsubfolder/ExampleStageKey0.tres" id="5_mh4ca"]
+[ext_resource type="Texture2D" uid="uid://ddcfskf8vhgui" path="res://icon.svg" id="6_bxt0t"]
+[ext_resource type="Resource" uid="uid://dxmw157mf1aj8" path="res://PACAS/subfolder/subsubfolder/ExampleStageKey0_PartA.tres" id="7_oyyxb"]
+[ext_resource type="Script" uid="uid://df6kyc3ut8x0t" path="res://addons/PACAS/components/interaction/InteractionObjectTextured.gd" id="8_h1wuj"]
+[ext_resource type="Texture2D" uid="uid://7humx7kh401m" path="res://icon2.svg" id="9_mgj3k"]
+[ext_resource type="Script" uid="uid://clhd6xbfcf8od" path="res://addons/PACAS/components/logic/LogicCheckInventory.gd" id="9_mh4ca"]
+[ext_resource type="Script" uid="uid://dneyilg8fyi0b" path="res://addons/PACAS/components/models/ObjectDataModel.gd" id="10_e57c5"]
+[ext_resource type="PackedScene" uid="uid://dcqbg3si2iyu6" path="res://addons/PACAS/debug/PACASDebug.tscn" id="11_2csqy"]
+[ext_resource type="Script" uid="uid://cds2lcumhuvhf" path="res://addons/PACAS/components/stage/stageStateController.gd" id="12_2pv0n"]
+
+[sub_resource type="Resource" id="Resource_2l6gx"]
+script = ExtResource("3_htrae")
+ScriptFile = "uid://cf6mxnbmxe1rf"
+ScriptMethod = &"testGiveItem"
+_paramType = 24
+callParameter = ExtResource("3_4x1aj")
+metadata/_custom_type_script = "uid://2ns21eoc6hy3"
+
+[sub_resource type="Resource" id="Resource_ylvqq"]
+script = ExtResource("3_htrae")
+ScriptFile = "uid://cf6mxnbmxe1rf"
+ScriptMethod = &"testGiveItem"
+_paramType = 24
+callParameter = ExtResource("7_oyyxb")
+metadata/_custom_type_script = "uid://2ns21eoc6hy3"
+
+[sub_resource type="Resource" id="Resource_oyyxb"]
+script = ExtResource("3_htrae")
+ScriptFile = "uid://cf6mxnbmxe1rf"
+ScriptMethod = &"testCombineKey"
+_paramType = 24
+callParameter = ExtResource("5_mh4ca")
+metadata/_custom_type_script = "uid://2ns21eoc6hy3"
+
+[sub_resource type="Resource" id="Resource_mh4ca"]
+script = ExtResource("3_htrae")
+ScriptFile = "uid://c0gjusspxbhie"
+ScriptMethod = &"unlockDoor"
+_paramType = 4
+callParameter = "DOOR_0"
+metadata/_custom_type_script = "uid://2ns21eoc6hy3"
+
+[sub_resource type="Resource" id="Resource_4x1aj"]
+script = ExtResource("9_mh4ca")
+itemName = "key"
+exactName = false
+checkTags = {
+"KEY_FOR": "DOOR_0"
+}
+followUp = SubResource("Resource_mh4ca")
+metadata/_custom_type_script = "uid://clhd6xbfcf8od"
+
+[sub_resource type="Resource" id="Resource_ela75"]
+script = ExtResource("3_htrae")
+ScriptFile = "uid://c0gjusspxbhie"
+ScriptMethod = &"openCloseDoorTest"
+_paramType = 4
+callParameter = "DOOR_0"
+metadata/_custom_type_script = "uid://2ns21eoc6hy3"
+
+[sub_resource type="Resource" id="Resource_f7vhs"]
+script = ExtResource("4_anwad")
+tagSource = &"DOOR_0"
+tags = PackedStringArray("UNLOCKED")
+isBlacklist = false
+requireAll = true
+useREGEX = false
+followUp = SubResource("Resource_ela75")
+alternateFollowUp = SubResource("Resource_4x1aj")
+metadata/_custom_type_script = "uid://cgw7aig56kv8"
+
+[sub_resource type="Resource" id="Resource_c8v4w"]
+script = ExtResource("10_e57c5")
+name = &"testTexturedObject"
+texturePath = "uid://ddcfskf8vhgui"
+description = ""
+tags = {}
+groupOwnerID = &""
+metadata/_custom_type_script = "uid://dneyilg8fyi0b"
+
+[sub_resource type="Resource" id="Resource_o8mci"]
+script = ExtResource("4_anwad")
+tagSource = &"__GLOBAL__"
+tags = PackedStringArray("test_global_tag")
+isBlacklist = false
+requireAll = false
+useREGEX = false
+metadata/_custom_type_script = "uid://cgw7aig56kv8"
+
+[sub_resource type="Resource" id="Resource_6bb0t"]
+script = ExtResource("4_anwad")
+tagSource = &"__GLOBAL__"
+tags = PackedStringArray("test_global_tag")
+isBlacklist = true
+requireAll = false
+useREGEX = false
+metadata/_custom_type_script = "uid://cgw7aig56kv8"
+
+[node name="ExampleStage" type="Node2D"]
+script = ExtResource("1_ixv62")
+
+[node name="Obj5" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+script = ExtResource("2_ulp8h")
+uniqueID = &"OBJ_TEST_ID5"
+onClicked = SubResource("Resource_2l6gx")
+dataModel = ExtResource("5_i1kfg")
+groups = PackedStringArray("test_group")
+metadata/_custom_type_script = "uid://djc5cxgqsdhfv"
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="Obj5"]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("6_bxt0t")
+centered = false
+
+[node name="Label" type="Label" parent="Obj5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Click me to add a key piece for door 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Obj6" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_right = 320.0
+offset_bottom = 128.0
+script = ExtResource("2_ulp8h")
+uniqueID = &"OBJ_TEST_ID6"
+onClicked = SubResource("Resource_ylvqq")
+dataModel = ExtResource("5_i1kfg")
+groups = PackedStringArray("test_group")
+metadata/_custom_type_script = "uid://djc5cxgqsdhfv"
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="Obj6"]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("6_bxt0t")
+centered = false
+
+[node name="Label" type="Label" parent="Obj6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Click me to add a key handle for door 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Obj7" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 416.0
+offset_top = 17.0
+offset_right = 544.0
+offset_bottom = 145.0
+script = ExtResource("2_ulp8h")
+uniqueID = &"OBJ_TEST_ID7"
+onClicked = SubResource("Resource_oyyxb")
+dataModel = ExtResource("5_i1kfg")
+groups = PackedStringArray("test_group")
+metadata/_custom_type_script = "uid://djc5cxgqsdhfv"
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="Obj7"]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("6_bxt0t")
+centered = false
+
+[node name="Label" type="Label" parent="Obj7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Click me to combine the key pieces"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="TexturedObj1" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 456.0
+offset_top = 382.0
+offset_right = 584.0
+offset_bottom = 630.0
+script = ExtResource("8_h1wuj")
+textures = {
+"DoorOpen": [2, ExtResource("9_mgj3k")],
+"default": [0, ExtResource("6_bxt0t")]
+}
+uniqueID = &"DOOR_0"
+onClicked = SubResource("Resource_f7vhs")
+dataModel = SubResource("Resource_c8v4w")
+metadata/_custom_type_script = "uid://df6kyc3ut8x0t"
+
+[node name="Label2" type="Label" parent="TexturedObj1"]
+layout_mode = 0
+offset_left = -96.0
+offset_top = 16.0
+offset_right = 221.0
+offset_bottom = 39.0
+text = "This requires a key  w/ DOOR_0 as target."
+
+[node name="PacasDebug" parent="." instance=ExtResource("11_2csqy")]
+layer = 4
+visible = false
+
+[node name="PanelContainer" parent="PacasDebug" index="0"]
+offset_left = -448.0
+offset_bottom = 384.0
+
+[node name="PACASStageState" type="Node" parent="."]
+script = ExtResource("12_2pv0n")
+stageStateName = &"DefaultState"
+description = "resets Group colors when global lacks a specific tag"
+stateLogic = SubResource("Resource_o8mci")
+onGroups = PackedStringArray("test_group")
+ScriptFile = "uid://cf7mmsic3myex"
+ScriptMethod = &"exampleColorWhite"
+_paramType = 0
+callParameter = null
+metadata/_custom_type_script = "uid://cds2lcumhuvhf"
+
+[node name="PACASStageState2" type="Node" parent="PACASStageState"]
+script = ExtResource("12_2pv0n")
+stageStateName = &"DefaultState_Sub"
+description = "resets color on Groups when global lacks a specific tag (executes after DefaultState so it resets them if it changed them for its groups first)"
+stateLogic = SubResource("Resource_6bb0t")
+onGroups = PackedStringArray("test_extra_group")
+ScriptFile = "uid://cf7mmsic3myex"
+ScriptMethod = &"exampleColorWhite"
+_paramType = 0
+callParameter = null
+metadata/_custom_type_script = "uid://cds2lcumhuvhf"
+
+[editable path="PacasDebug"]

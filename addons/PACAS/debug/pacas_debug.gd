@@ -8,12 +8,18 @@ var typeFilters:PackedStringArray=[]
 
 @export var maxLogsShown:int=100
 
+var lastSelected:PACASInteractionObject=null
+signal selectedObject(object:PACASInteractionObject)
+
 func _ready() -> void:
+	PACASInteractions.debugger=self
 	#should only show if a setting/launch option is set for debugging
 	show()
 	
 	setupLogTree()
 	setupTypeFilters()
+	setupInventoryTree()
+	setupTags()
 	
 	$PanelContainer/TabContainer.tab_changed.connect(func(tab:int):
 		if tab==0:
@@ -41,16 +47,18 @@ func setupLogTree()->void:
 			$HighlightRect.visible=false
 	)
 	
-	%EventList.item_selected.connect(
-		func():
-			var selected:TreeItem = %EventList.get_selected()
-			var objID = selected.get_metadata(2)
-			var instance = instance_from_id(objID) as PACASInteractionObject
-			$HighlightRect.visible=true
-			$HighlightRect.position=instance.get_rect().position
-			$HighlightRect.size=instance.get_rect().size
-			
+	%EventList.item_selected.connect(func():
+		var selected:TreeItem = %EventList.get_selected()
+		var objID = selected.get_metadata(2)
+		var instance = instance_from_id(objID) as PACASInteractionObject
+		selectedObject.emit(instance)
 	)
+	selectedObject.connect(func(obj:PACASInteractionObject):
+		if obj!=null:
+			$HighlightRect.visible=true
+			$HighlightRect.position=obj.get_rect().position
+			$HighlightRect.size=obj.get_rect().size
+		)
 	
 
 func setupTypeFilters()->void:
@@ -65,6 +73,46 @@ func setupTypeFilters()->void:
 		)
 		typeFilters.push_back(type)
 		%EventTypeFilters.add_child(btn)
+
+func setupInventoryTree()->void:
+	%Inventory.set_column_title(0,"Name")
+	%Inventory.set_column_title(1,"Description")
+	%Inventory.set_column_title(2,"Count")
+	
+	PACASInteractions.inventoryHandler.inventory.updated.connect(
+		func():
+			%Inventory.clear()
+			var root :TreeItem= %Inventory.create_item()
+			for item in PACASInteractions.inventoryHandler.inventory.contents:
+				var tItem:TreeItem = root.create_child()
+				tItem.set_text(0,item.dataModel.name)
+				tItem.set_text(1,item.dataModel.description)
+				tItem.set_text(2,str(item.inventoryInfo.get("count",1)))
+	)
+
+
+
+func setupTags()->void:
+	%Tags.set_column_title(0,"Tag")
+	%Tags.set_column_title(1,"Value")
+	
+	selectedObject.connect(func(obj:PACASInteractionObject):
+		if lastSelected!=null:
+			lastSelected.dataModel.tagged.disconnect(updateTags)
+		if obj!=null:
+			obj.dataModel.tagged.connect(updateTags.bind(obj))
+		lastSelected=obj
+		updateTags(null,null,obj)
+			)
+
+func updateTags(_a=null,_b=null,obj:PACASInteractionObject=null)->void:
+	%Tags.clear()
+	var root:TreeItem=%Tags.create_item()
+	if obj==null:return
+	for tag in obj.dataModel.tags:
+		var item:TreeItem = root.create_child()
+		item.set_text(0,tag)
+		item.set_text(1,var_to_str(obj.dataModel.tags[tag]))
 
 func logInteraction(interaction:PACASInteractions.InteractionTypes,interactedObject:PACASInteractionObject)->void:
 	var runTime=Time.get_ticks_msec()

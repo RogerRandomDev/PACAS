@@ -57,10 +57,25 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="Tags" type="HBoxContainer" parent="PanelContainer/TabContainer"]
+[node name="Tags" type="Tree" parent="PanelContainer/TabContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
+columns = 2
+column_titles_visible = true
+hide_root = true
 metadata/_tab_index = 3
+
+[node name="Inventory" type="Tree" parent="PanelContainer/TabContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+columns = 3
+column_titles_visible = true
+enable_recursive_folding = false
+hide_root = true
+scroll_horizontal_enabled = false
+metadata/_tab_index = 4
 
 [node name="HighlightRect" type="ColorRect" parent="."]
 visible = false
