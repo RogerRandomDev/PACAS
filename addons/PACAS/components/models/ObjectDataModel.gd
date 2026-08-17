@@ -33,3 +33,29 @@ func setTag(tag:StringName,value:Variant=null,removeNull:bool=true)->void:
 ## only checks and returns if a tag exists.
 func checkForTag(tag:StringName)->bool:
 	return tags.has(tag)
+
+## returns a format that can be saved
+func getPacked(additional:Variant=null)->String:
+	return JSON.stringify(
+		[name,texturePath,description,tags,groupOwnerID,additional]
+	)
+
+static func getUnpacked(packed:String)->PACASObjectDataModel:
+	var unpackedString = JSON.parse_string(packed)
+	var unpackedObject:PACASObjectDataModel=PACASObjectDataModel.new()
+	unpackedObject.name=unpackedString[0]
+	unpackedObject.texturePath=unpackedString[1]
+	unpackedObject.description=unpackedString[2]
+	unpackedObject.tags=unpackedString[3]
+	unpackedObject.groupOwnerID=unpackedString[4]
+	return unpackedObject
+
+## Mainly used by inventory items so we only parse the packed data once
+static func getUnpackedFromArray(packed:Array)->PACASObjectDataModel:
+	var unpackedObject:PACASObjectDataModel=PACASObjectDataModel.new()
+	unpackedObject.name=packed[0]
+	unpackedObject.texturePath=packed[1]
+	unpackedObject.description=packed[2]
+	unpackedObject.tags=packed[3]
+	unpackedObject.groupOwnerID=packed[4]
+	return unpackedObject

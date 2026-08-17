@@ -23,6 +23,7 @@ var ObjectUUIDS:Dictionary={}
 var dataModel:PACASObjectDataModel=PACASObjectDataModel.new()
 
 var inventoryHandler:PACASInventoryBaseMiddleware=PACASInventoryBaseMiddleware.new()
+var saveHandler:PACASSaveBase=PACASSaveBase.new()
 
 var debugger
 
